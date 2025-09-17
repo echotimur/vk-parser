@@ -1,28 +1,20 @@
-#pragma once
-
+#include <iostream>
+#include <filesystem>
+#include <fstream>
 #include <string>
-3include <optional>
-
-#include "nlohmann/json.hpp"
-#include "cpp-httplib/httplib.h"
-
-#include "database.hpp"
+#include <optional>
 
 
-class PARSER {
-
-    public:
-
-
-	PARSER(nlohmann::json data);
-
-	optional<nlohmann::json> filter();        
-
-
-    private:
-
-        
-	nlohmann::json data_;
-
-
+class RECOMENDER {
+	
+	public:
+	
+		RECOMENDER(nlohmann::json data);
+		
+		std::optional<nlohmann::json> filtration();
+	
+	private:
+	
+		nlohmann::json data_;
+	
 };
