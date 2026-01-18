@@ -1,17 +1,26 @@
-#include <iostream>
-#include <filesystem>
-#include <fstream>
 #include <string>
 #include <optional>
 
+#include "nlohmann/json.hpp"
+#include "cpp-httplib/httplib.h"
 
-RECOMENDER::RECOMENDER (nlohmann::json data) : data_(data) {}
+#include "recommender.hpp"
 
 
-nlohmann::json RECOMENDER::filtration () {
+RECOMMENDER::RECOMMENDER (nlohmann::json data) : data_(data) {}
 
-	if (data_.contains("execute_error")) return nullopt;
-	
-	if (!(data_.contains("city") || data_.contains("") ||))
 
-}	
+std::optional<nlohmann::json> RECOMMENDER::filter () {
+
+    // std::cout << data_.dump();
+    // return std::nullopt;
+
+    if (data_.contains("execute_errors")) return std::nullopt;
+    // else if (data_.contains("city")) return data_;
+    else if (!data_["response"]["user_info"][0]["city"].empty() && data_["response"]["user_info"][0]["city"]["title"] == "Moscow") return data_;
+    // else return data_;
+
+    return std::nullopt;
+
+
+}
